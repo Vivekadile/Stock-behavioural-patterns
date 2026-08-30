@@ -27,3 +27,6 @@ data/processed/model_features.csv
 data/processed/splits/*.csv
 # ...but keep the small, non-reproducible-without-a-run scaler params:
 !data/processed/splits/scaler.json
+
+# scratch run logs
+data/_*

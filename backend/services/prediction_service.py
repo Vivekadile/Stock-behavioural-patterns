@@ -38,16 +38,18 @@ from prepare_dataset import apply_saved_scaling  # noqa: E402
 
 FEATURES_PATH = PROJECT_ROOT / "data" / "processed" / "model_features.csv"
 
-# Test-set accuracy per horizon from the Phase 6.5 baseline rerun
+# Test-set accuracy per horizon from the Phase 6/10 NIFTY 200 rerun
 # (data/phase6_baseline_results.csv, logistic regression on scaled
-# features) and the year-to-year edge range (Phase 8) - shown alongside
-# every prediction so the API never returns a number without its own
-# honest track record attached.
+# features, 59k-row test set) - shown alongside every prediction so the
+# API never returns a number without its own honest track record.
+# The directional edge is thin (~+1 point over base rate); the project's
+# actual result is the PORTFOLIO information ratio of ~1.0 after costs
+# (Phase 10), not the single-name hit rate.
 HORIZON_STATS = {
-    7:  {"historical_accuracy": 0.512, "historical_accuracy_top_tercile": 0.552, "edge_range": (-0.004, 0.013)},
-    30: {"historical_accuracy": 0.523, "historical_accuracy_top_tercile": 0.556, "edge_range": (-0.017, 0.043)},
-    60: {"historical_accuracy": 0.527, "historical_accuracy_top_tercile": 0.536, "edge_range": (-0.016, 0.024)},
-    90: {"historical_accuracy": 0.485, "historical_accuracy_top_tercile": 0.545, "edge_range": (-0.015, 0.010)},
+    7:  {"historical_accuracy": 0.502, "historical_accuracy_top_tercile": 0.503, "edge_range": (-0.010, 0.021)},
+    30: {"historical_accuracy": 0.511, "historical_accuracy_top_tercile": 0.508, "edge_range": (-0.005, 0.016)},
+    60: {"historical_accuracy": 0.507, "historical_accuracy_top_tercile": 0.510, "edge_range": (-0.008, 0.013)},
+    90: {"historical_accuracy": 0.515, "historical_accuracy_top_tercile": 0.515, "edge_range": (-0.006, 0.015)},
 }
 
 POSITIVE_THRESHOLD = 0.54
@@ -195,10 +197,11 @@ def get_prediction(symbol: str, horizon: int) -> dict | None:
         "historical_accuracy_at_horizon": stats["historical_accuracy"],
         "historical_accuracy_top_tercile": stats["historical_accuracy_top_tercile"],
         "confidence_note": (
-            f"This signal's edge over naive guessing has ranged from "
-            f"{stats['edge_range'][0]:+.1%} to {stats['edge_range'][1]:+.1%} across "
-            f"recent years (walk-forward tested, 2021-2025) - treat as a modest, "
-            f"unstable statistical tilt, not a reliable forecast."
+            f"Single-name directional accuracy is only ~{stats['historical_accuracy']:.0%} "
+            f"(barely above the ~50% base rate). The tested value of this model is at the "
+            f"PORTFOLIO level: ranking the NIFTY 200 by this probability and holding the top "
+            f"quintile produced a post-cost information ratio near 1.0 over 2021-2026 "
+            f"(Phase 10). Treat one stock's number as a weak tilt, not a forecast."
         ),
     }
 

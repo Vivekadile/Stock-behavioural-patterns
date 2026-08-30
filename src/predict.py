@@ -43,14 +43,15 @@ from prepare_dataset import apply_saved_scaling
 PROCESSED_DIR = Path(__file__).resolve().parent.parent / "data" / "processed"
 FEATURES_PATH = PROCESSED_DIR / "model_features.csv"
 
-# Test-set accuracy per horizon from the Phase 6.5 baseline rerun
-# (data/phase6_baseline_results.csv, logistic regression, scaled features).
-# 'median' = beats_median_{h}d target; 'tercile' = top_tercile_{h}d.
-# Shown alongside every prediction so the output is never presented without
-# its own honest track record attached.
+# Test-set accuracy per horizon from the Phase 6/10 NIFTY 200 rerun
+# (data/phase6_baseline_results.csv, logistic regression, scaled features,
+# 59k-row test set). 'median' = beats_median_{h}d; 'tercile' =
+# top_tercile_{h}d. The single-name edge is ~+1 point over the base rate;
+# the project's real result is the Phase 10 portfolio information ratio
+# (~1.0 after costs), not this hit rate.
 HISTORICAL_ACCURACY = {
-    "median":  {7: 0.512, 30: 0.523, 60: 0.527, 90: 0.485},
-    "tercile": {7: 0.552, 30: 0.556, 60: 0.536, 90: 0.545},
+    "median":  {7: 0.502, 30: 0.511, 60: 0.507, 90: 0.515},
+    "tercile": {7: 0.503, 30: 0.508, 60: 0.510, 90: 0.515},
 }
 CONFIDENCE_LABEL = {
     True: "Low-to-moderate (this signal has been inconsistent year to year - "
