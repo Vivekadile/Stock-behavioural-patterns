@@ -380,6 +380,11 @@ def main() -> None:
     keep_cols = ["Date", "Symbol", "Industry", PRICE_COL, "Close"] + FEATURE_COLS + all_label_cols
     df = df[keep_cols].sort_values(["Date", "Symbol"]).reset_index(drop=True)
 
+    # float32 is plenty for features/labels and roughly halves the file size
+    # and every downstream read's memory footprint (matters at NSE-200 scale).
+    float_cols = df.select_dtypes("float64").columns
+    df[float_cols] = df[float_cols].astype("float32")
+
     df.to_csv(OUT_PATH, index=False)
 
     print(f"Feature engineering done: {before:,} -> {after:,} rows (dropped {before - after:,} warm-up/tail rows)")

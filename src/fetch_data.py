@@ -33,10 +33,23 @@ def to_filename(symbol: str) -> str:
     return symbol.replace("&", "")
 
 
+MIN_ROWS = 300  # ~15 months; below this a stock can't clear the 200-day feature
+                # warm-up + 90-day label window, so it's flagged not saved-and-forgotten
+RETRIES = 3
+
+
 def download_symbol(symbol: str) -> pd.DataFrame | None:
     ticker = to_yahoo_ticker(symbol)
-    df = yf.download(ticker, start=START_DATE, progress=False, auto_adjust=False)
-    if df.empty:
+    df = None
+    for attempt in range(1, RETRIES + 1):
+        try:
+            df = yf.download(ticker, start=START_DATE, progress=False, auto_adjust=False)
+            if not df.empty:
+                break
+        except Exception as exc:
+            print(f"  attempt {attempt}/{RETRIES} failed: {exc}")
+        time.sleep(2 * attempt)  # back off on Yahoo rate-limits
+    if df is None or df.empty:
         return None
     df.columns = df.columns.get_level_values(0)
     df = df.reset_index()
@@ -53,6 +66,7 @@ def download_index() -> pd.DataFrame:
 def main() -> None:
     symbols = load_symbols()
     failed = []
+    short_history = []
 
     for symbol in symbols:
         out_path = RAW_DIR / f"{to_filename(symbol)}.csv"
@@ -69,12 +83,16 @@ def main() -> None:
             continue
 
         if df is None:
-            print("  No data returned (likely delisted/merged)")
+            print("  No data returned (likely delisted/merged/renamed on Yahoo)")
             failed.append(symbol)
             continue
 
         df.to_csv(out_path, index=False)
-        print(f"  Saved {len(df)} rows -> {out_path.name}")
+        note = ""
+        if len(df) < MIN_ROWS:
+            short_history.append((symbol, len(df)))
+            note = f"  [SHORT HISTORY - < {MIN_ROWS} rows, will contribute little/nothing]"
+        print(f"  Saved {len(df)} rows -> {out_path.name}{note}")
         time.sleep(0.5)
 
     print("Downloading NIFTY50 index...")
@@ -83,9 +101,18 @@ def main() -> None:
     print(f"  Saved {len(idx_df)} rows -> {INDEX_OUT_NAME}")
 
     if failed:
-        print("\nFailed / empty symbols (check manually):")
+        print("\nFailed / empty symbols (check Yahoo ticker, add to TICKER_OVERRIDES):")
         for s in failed:
-            print(f"  - {s}")
+            print(f"  - {s}  (tried {to_yahoo_ticker(s)})")
+
+    if short_history:
+        print(f"\nShort-history symbols (< {MIN_ROWS} rows - recent IPOs / demerged entities):")
+        for s, n in short_history:
+            print(f"  - {s}: {n} rows")
+
+    print("\nNEXT: run process_data.py, then phase1_audit.py to catch unadjusted "
+          "splits / new corporate-action breaks across the expanded universe, and "
+          "add any it finds to CORPORATE_ACTION_BREAKS in process_data.py.")
 
 
 if __name__ == "__main__":
