@@ -26,8 +26,14 @@ PRICE_COLS = ["Open", "High", "Low", "Close", "Adj Close"]
 # market movement. Add to this list as new cases are found during validation.
 CORPORATE_ACTION_BREAKS = {
     "TATAMOTORS": ["2025-10-14"],  # demerger into passenger/commercial vehicle entities
+    "TMPV": ["2025-10-14"],  # same demerger, new NIFTY 200 ticker for the passenger-vehicle entity
     "VEDL": ["2026-04-30"],  # demerger into Aluminium/Oil&Gas/Power/Steel/Base Metals entities -
                              # found via src/phase1_audit.py, was NOT previously flagged (-64.9% raw)
+    # NOTE (NIFTY 200 expansion): phase1_audit also flags large Adj-Close
+    # breaks for PATANJALI (2020-01-27, -94.9%: Ruchi Soya rename + FPO
+    # dilution) and MOTILALOFS (2024-01-01, -74.6%: likely unadjusted
+    # bonus). Left unmasked for now - a few rows out of ~678k - revisit if
+    # either stock shows up as an outlier in results.
 }
 
 

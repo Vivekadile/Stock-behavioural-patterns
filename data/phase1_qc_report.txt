@@ -2,14 +2,58 @@
 ==============================================================================
 PHASE 1 QC REPORT
 ==============================================================================
-Files audited: 48 stocks + NIFTY50_INDEX.csv + stock_metadata.csv + fundamentals_annual.csv
-Universe: ['ADANIPORTS', 'ASIANPAINT', 'AXISBANK', 'BAJAJ-AUTO', 'BAJAJFINSV', 'BAJFINANCE', 'BHARTIARTL', 'BPCL', 'BRITANNIA', 'CIPLA', 'COALINDIA', 'DRREDDY', 'EICHERMOT', 'GAIL', 'GRASIM', 'HCLTECH', 'HDFCBANK', 'HEROMOTOCO', 'HINDALCO', 'HINDUNILVR', 'ICICIBANK', 'INDUSINDBK', 'INFY', 'IOC', 'ITC', 'JSWSTEEL', 'KOTAKBANK', 'LT', 'MARUTI', 'MM', 'NESTLEIND', 'NTPC', 'ONGC', 'POWERGRID', 'RELIANCE', 'SBIN', 'SHREECEM', 'SUNPHARMA', 'TATAMOTORS', 'TATASTEEL', 'TCS', 'TECHM', 'TITAN', 'ULTRACEMCO', 'UPL', 'VEDL', 'WIPRO', 'ZEEL']
+Files audited: 202 stocks + NIFTY50_INDEX.csv + stock_metadata.csv + fundamentals_annual.csv
+Universe: ['360ONE', 'ABB', 'ABCAPITAL', 'ADANIENSOL', 'ADANIENT', 'ADANIGREEN', 'ADANIPORTS', 'ADANIPOWER', 'ALKEM', 'AMBUJACEM', 'APLAPOLLO', 'APOLLOHOSP', 'ASHOKLEY', 'ASIANPAINT', 'ASTRAL', 'ATGL', 'AUBANK', 'AUROPHARMA', 'AXISBANK', 'BAJAJ-AUTO', 'BAJAJFINSV', 'BAJAJHLDNG', 'BAJFINANCE', 'BANKBARODA', 'BANKINDIA', 'BDL', 'BEL', 'BHARATFORG', 'BHARTIARTL', 'BHEL', 'BIOCON', 'BLUESTARCO', 'BOSCHLTD', 'BPCL', 'BRITANNIA', 'BSE', 'CANBK', 'CGPOWER', 'CHOLAFIN', 'CIPLA', 'COALINDIA', 'COCHINSHIP', 'COFORGE', 'COLPAL', 'CONCOR', 'COROMANDEL', 'CUMMINSIND', 'DABUR', 'DIVISLAB', 'DIXON', 'DLF', 'DMART', 'DRREDDY', 'EICHERMOT', 'ENRIN', 'ETERNAL', 'EXIDEIND', 'FEDERALBNK', 'FORTIS', 'GAIL', 'GLENMARK', 'GMRAIRPORT', 'GODFRYPHLP', 'GODREJCP', 'GODREJPROP', 'GRASIM', 'GROWW', 'GVTD', 'HAL', 'HAVELLS', 'HCLTECH', 'HDFCAMC', 'HDFCBANK', 'HDFCLIFE', 'HEROMOTOCO', 'HINDALCO', 'HINDPETRO', 'HINDUNILVR', 'HINDZINC', 'HUDCO', 'HYUNDAI', 'ICICIAMC', 'ICICIBANK', 'ICICIGI', 'IDEA', 'IDFCFIRSTB', 'INDHOTEL', 'INDIANB', 'INDIGO', 'INDUSINDBK', 'INDUSTOWER', 'INFY', 'IOC', 'IRCTC', 'IREDA', 'IRFC', 'ITC', 'JINDALSTEL', 'JIOFIN', 'JSWENERGY', 'JSWSTEEL', 'JUBLFOOD', 'KALYANKJIL', 'KEI', 'KOTAKBANK', 'KPITTECH', 'LAURUSLABS', 'LENSKART', 'LGEINDIA', 'LICHSGFIN', 'LODHA', 'LT', 'LTF', 'LTM', 'LUPIN', 'MANKIND', 'MARICO', 'MARUTI', 'MAXHEALTH', 'MAZDOCK', 'MCX', 'MFSL', 'MM', 'MMFIN', 'MOTHERSON', 'MOTILALOFS', 'MPHASIS', 'MRF', 'MUTHOOTFIN', 'NATIONALUM', 'NAUKRI', 'NESTLEIND', 'NHPC', 'NMDC', 'NTPC', 'NYKAA', 'OBEROIRLTY', 'OFSS', 'OIL', 'ONGC', 'PAGEIND', 'PATANJALI', 'PAYTM', 'PERSISTENT', 'PFC', 'PHOENIXLTD', 'PIDILITIND', 'PIIND', 'PNB', 'POLICYBZR', 'POLYCAB', 'POWERGRID', 'POWERINDIA', 'PREMIERENE', 'PRESTIGE', 'RADICO', 'RECLTD', 'RELIANCE', 'RVNL', 'SAIL', 'SBICARD', 'SBILIFE', 'SBIN', 'SHREECEM', 'SHRIRAMFIN', 'SIEMENS', 'SOLARINDS', 'SRF', 'SUNPHARMA', 'SUPREMEIND', 'SUZLON', 'SWIGGY', 'TATACAP', 'TATACOMM', 'TATACONSUM', 'TATAELXSI', 'TATAINVEST', 'TATAMOTORS', 'TATAPOWER', 'TATASTEEL', 'TCS', 'TECHM', 'TIINDIA', 'TITAN', 'TMCV', 'TMPV', 'TORNTPHARM', 'TRENT', 'TVSMOTOR', 'ULTRACEMCO', 'UNIONBANK', 'UNITDSPR', 'UPL', 'VBL', 'VEDL', 'VMM', 'VOLTAS', 'WAAREEENER', 'WIPRO', 'YESBANK', 'ZEEL', 'ZYDUSLIFE']
 
 ==============================================================================
 Checks 1-6: Structural Integrity (per file)
 ==============================================================================
+[360ONE] missing values: {'Close': 1}
+[ABB] missing values: {'Close': 1}
+[ALKEM] missing values: {'Close': 1}
+[APOLLOHOSP] missing values: {'Close': 1}
+[ATGL] missing values: {'Close': 1}
+[AUBANK] missing values: {'Close': 1}
+[AUROPHARMA] missing values: {'Close': 1}
+[BAJAJHLDNG] missing values: {'Close': 1}
+[BHARATFORG] missing values: {'Close': 1}
+[BHEL] missing values: {'Close': 1}
+[BOSCHLTD] missing values: {'Close': 1}
+[CANBK] missing values: {'Close': 1}
+[COROMANDEL] missing values: {'Close': 1}
+[CUMMINSIND] missing values: {'Close': 1}
+[FEDERALBNK] missing values: {'Close': 1}
+[FORTIS] missing values: {'Close': 1}
+[GODREJPROP] missing values: {'Close': 1}
+[HDFCAMC] missing values: {'Close': 1}
+[ICICIAMC] missing values: {'Close': 1}
+[JUBLFOOD] missing values: {'Close': 1}
+[KEI] 1 invalid OHLC relationships
+[LGEINDIA] missing values: {'Close': 1}
+[LTM] missing values: {'Close': 1}
+[MARICO] missing values: {'Close': 1}
+[MCX] 1 invalid OHLC relationships
+[MRF] missing values: {'Close': 1}
+[MUTHOOTFIN] missing values: {'Close': 1}
+[NATIONALUM] missing values: {'Close': 1}
+[NYKAA] missing values: {'Close': 1}
+[OBEROIRLTY] missing values: {'Close': 1}
+[OIL] missing values: {'Close': 1}
+[PAGEIND] missing values: {'Close': 1}
+[PHOENIXLTD] missing values: {'Close': 1}
+[PIDILITIND] missing values: {'Close': 1}
+[PIIND] 1 invalid OHLC relationships
+[RADICO] missing values: {'Close': 1}
+[SBILIFE] missing values: {'Close': 1}
+[SRF] missing values: {'Close': 1}
+[TATACAP] missing values: {'Close': 1}
+[TATACOMM] missing values: {'Close': 1}
+[TATAINVEST] missing values: {'Close': 1}
+[TIINDIA] missing values: {'Close': 1}
+[TORNTPHARM] missing values: {'Close': 1}
+[ZYDUSLIFE] missing values: {'Close': 1}
 
-Result: CLEAN - no issues found
+Result: 44 issues found (see above)
 
 ==============================================================================
 Checks 7, 10-13: Ticker Changes & Corporate Actions (documented, not inferred)
@@ -31,13 +75,66 @@ Close and Adj Close jump together by >25% - that pattern indicates a genuine lar
 adjustment that failed to apply, and needs manual review rather than being trusted blindly.
 NOTE: computed on Volume>0 rows only - zero-volume placeholder rows create false-positive jumps
 when a real trading day is compared against a stale carried-forward quote, not a real prior price.
+[ADANIENT] 2015-06-03: Close and Adj Close both moved >25% together (Close ret=-38.75%) - verify against KNOWN_CORPORATE_ACTIONS above
+[ADANIENT] 2019-05-20: Close and Adj Close both moved >25% together (Close ret=27.37%) - verify against KNOWN_CORPORATE_ACTIONS above
+[ADANIENT] 2023-02-01: Close and Adj Close both moved >25% together (Close ret=-28.20%) - verify against KNOWN_CORPORATE_ACTIONS above
+[ADANIENT] 2023-02-02: Close and Adj Close both moved >25% together (Close ret=-26.70%) - verify against KNOWN_CORPORATE_ACTIONS above
+[ADANIPOWER] 2018-10-10: Close and Adj Close both moved >25% together (Close ret=25.26%) - verify against KNOWN_CORPORATE_ACTIONS above
+[ADANIPOWER] 2020-03-12: Close and Adj Close both moved >25% together (Close ret=-26.46%) - verify against KNOWN_CORPORATE_ACTIONS above
 [AXISBANK] 2020-03-23: Close and Adj Close both moved >25% together (Close ret=-27.91%) - verify against KNOWN_CORPORATE_ACTIONS above
 [BAJAJFINSV] 2020-03-23: Close and Adj Close both moved >25% together (Close ret=-25.86%) - verify against KNOWN_CORPORATE_ACTIONS above
+[BANKBARODA] 2017-10-25: Close and Adj Close both moved >25% together (Close ret=31.44%) - verify against KNOWN_CORPORATE_ACTIONS above
+[BANKINDIA] 2017-10-25: Close and Adj Close both moved >25% together (Close ret=34.12%) - verify against KNOWN_CORPORATE_ACTIONS above
+[CANBK] 2017-10-25: Close and Adj Close both moved >25% together (Close ret=38.73%) - verify against KNOWN_CORPORATE_ACTIONS above
+[CHOLAFIN] 2020-03-23: Close and Adj Close both moved >25% together (Close ret=-29.60%) - verify against KNOWN_CORPORATE_ACTIONS above
+[DLF] 2014-10-14: Close and Adj Close both moved >25% together (Close ret=-28.56%) - verify against KNOWN_CORPORATE_ACTIONS above
+[GLENMARK] 2020-06-22: Close and Adj Close both moved >25% together (Close ret=26.97%) - verify against KNOWN_CORPORATE_ACTIONS above
+[HINDZINC] 2024-05-21: Close and Adj Close both moved >25% together (Close ret=25.60%) - verify against KNOWN_CORPORATE_ACTIONS above
+[IDEA] 2017-01-30: Close and Adj Close both moved >25% together (Close ret=25.26%) - verify against KNOWN_CORPORATE_ACTIONS above
+[IDEA] 2019-07-29: Close and Adj Close both moved >25% together (Close ret=-27.03%) - verify against KNOWN_CORPORATE_ACTIONS above
+[IDEA] 2019-11-19: Close and Adj Close both moved >25% together (Close ret=35.96%) - verify against KNOWN_CORPORATE_ACTIONS above
+[IDEA] 2020-02-19: Close and Adj Close both moved >25% together (Close ret=40.00%) - verify against KNOWN_CORPORATE_ACTIONS above
+[IDEA] 2020-03-13: Close and Adj Close both moved >25% together (Close ret=33.33%) - verify against KNOWN_CORPORATE_ACTIONS above
+[IDEA] 2020-03-18: Close and Adj Close both moved >25% together (Close ret=-35.05%) - verify against KNOWN_CORPORATE_ACTIONS above
+[IDEA] 2020-09-03: Close and Adj Close both moved >25% together (Close ret=26.77%) - verify against KNOWN_CORPORATE_ACTIONS above
+[IDEA] 2021-09-16: Close and Adj Close both moved >25% together (Close ret=25.70%) - verify against KNOWN_CORPORATE_ACTIONS above
 [INDUSINDBK] 2020-03-26: Close and Adj Close both moved >25% together (Close ret=44.67%) - verify against KNOWN_CORPORATE_ACTIONS above
 [INDUSINDBK] 2025-03-11: Close and Adj Close both moved >25% together (Close ret=-27.16%) - verify against KNOWN_CORPORATE_ACTIONS above
+[IRFC] 2024-01-16: Close and Adj Close both moved >25% together (Close ret=25.09%) - verify against KNOWN_CORPORATE_ACTIONS above
+[JINDALSTEL] 2015-02-19: Close and Adj Close both moved >25% together (Close ret=25.75%) - verify against KNOWN_CORPORATE_ACTIONS above
+[JINDALSTEL] 2020-04-07: Close and Adj Close both moved >25% together (Close ret=28.90%) - verify against KNOWN_CORPORATE_ACTIONS above
+[MFSL] 2016-01-27: Close and Adj Close both moved >25% together (Close ret=-26.08%) - verify against KNOWN_CORPORATE_ACTIONS above
+[MFSL] 2020-03-23: Close and Adj Close both moved >25% together (Close ret=-29.23%) - verify against KNOWN_CORPORATE_ACTIONS above
+[MMFIN] 2020-03-23: Close and Adj Close both moved >25% together (Close ret=-28.64%) - verify against KNOWN_CORPORATE_ACTIONS above
+[MOTHERSON] 2022-01-14: Close and Adj Close both moved >25% together (Close ret=28.55%) - verify against KNOWN_CORPORATE_ACTIONS above
+[MOTILALOFS] 2024-01-01: Close and Adj Close both moved >25% together (Close ret=-74.61%) - verify against KNOWN_CORPORATE_ACTIONS above
+[MPHASIS] 2011-02-25: Close and Adj Close both moved >25% together (Close ret=-28.08%) - verify against KNOWN_CORPORATE_ACTIONS above
+[OFSS] 2024-01-18: Close and Adj Close both moved >25% together (Close ret=28.69%) - verify against KNOWN_CORPORATE_ACTIONS above
+[PATANJALI] 2010-12-08: Close and Adj Close both moved >25% together (Close ret=-27.97%) - verify against KNOWN_CORPORATE_ACTIONS above
+[PATANJALI] 2020-01-27: Close and Adj Close both moved >25% together (Close ret=-94.93%) - verify against KNOWN_CORPORATE_ACTIONS above
+[PNB] 2017-10-25: Close and Adj Close both moved >25% together (Close ret=46.20%) - verify against KNOWN_CORPORATE_ACTIONS above
+[RECLTD] 2024-06-04: Close and Adj Close both moved >25% together (Close ret=-25.19%) - verify against KNOWN_CORPORATE_ACTIONS above
 [SBIN] 2017-10-25: Close and Adj Close both moved >25% together (Close ret=27.69%) - verify against KNOWN_CORPORATE_ACTIONS above
+[SRF] 2013-12-02: Close and Adj Close both moved >25% together (Close ret=27.14%) - verify against KNOWN_CORPORATE_ACTIONS above
+[SUZLON] 2013-02-28: Close and Adj Close both moved >25% together (Close ret=-34.02%) - verify against KNOWN_CORPORATE_ACTIONS above
+[SUZLON] 2019-02-22: Close and Adj Close both moved >25% together (Close ret=29.21%) - verify against KNOWN_CORPORATE_ACTIONS above
+[SUZLON] 2019-03-05: Close and Adj Close both moved >25% together (Close ret=25.21%) - verify against KNOWN_CORPORATE_ACTIONS above
 [TATAMOTORS] 2025-10-14: Close and Adj Close both moved >25% together (Close ret=-40.15%) - verify against KNOWN_CORPORATE_ACTIONS above
+[TMPV] 2025-10-14: Close and Adj Close both moved >25% together (Close ret=-40.15%) - verify against KNOWN_CORPORATE_ACTIONS above
+[TRENT] 2026-01-01: Close and Adj Close both moved >25% together (Close ret=-33.05%) - verify against KNOWN_CORPORATE_ACTIONS above
+[UNIONBANK] 2017-10-25: Close and Adj Close both moved >25% together (Close ret=34.17%) - verify against KNOWN_CORPORATE_ACTIONS above
+[UNITDSPR] 2012-11-12: Close and Adj Close both moved >25% together (Close ret=34.73%) - verify against KNOWN_CORPORATE_ACTIONS above
 [VEDL] 2026-04-30: Close and Adj Close both moved >25% together (Close ret=-64.90%) - verify against KNOWN_CORPORATE_ACTIONS above
+[YESBANK] 2018-09-21: Close and Adj Close both moved >25% together (Close ret=-29.04%) - verify against KNOWN_CORPORATE_ACTIONS above
+[YESBANK] 2019-02-14: Close and Adj Close both moved >25% together (Close ret=28.15%) - verify against KNOWN_CORPORATE_ACTIONS above
+[YESBANK] 2019-04-30: Close and Adj Close both moved >25% together (Close ret=-29.17%) - verify against KNOWN_CORPORATE_ACTIONS above
+[YESBANK] 2019-10-03: Close and Adj Close both moved >25% together (Close ret=32.81%) - verify against KNOWN_CORPORATE_ACTIONS above
+[YESBANK] 2020-03-05: Close and Adj Close both moved >25% together (Close ret=25.60%) - verify against KNOWN_CORPORATE_ACTIONS above
+[YESBANK] 2020-03-06: Close and Adj Close both moved >25% together (Close ret=-56.11%) - verify against KNOWN_CORPORATE_ACTIONS above
+[YESBANK] 2020-03-09: Close and Adj Close both moved >25% together (Close ret=31.58%) - verify against KNOWN_CORPORATE_ACTIONS above
+[YESBANK] 2020-03-11: Close and Adj Close both moved >25% together (Close ret=35.53%) - verify against KNOWN_CORPORATE_ACTIONS above
+[YESBANK] 2020-03-16: Close and Adj Close both moved >25% together (Close ret=45.21%) - verify against KNOWN_CORPORATE_ACTIONS above
+[YESBANK] 2020-03-17: Close and Adj Close both moved >25% together (Close ret=58.09%) - verify against KNOWN_CORPORATE_ACTIONS above
 [ZEEL] 2019-01-25: Close and Adj Close both moved >25% together (Close ret=-26.61%) - verify against KNOWN_CORPORATE_ACTIONS above
 [ZEEL] 2021-09-14: Close and Adj Close both moved >25% together (Close ret=39.98%) - verify against KNOWN_CORPORATE_ACTIONS above
 [ZEEL] 2021-09-22: Close and Adj Close both moved >25% together (Close ret=31.72%) - verify against KNOWN_CORPORATE_ACTIONS above
@@ -67,7 +164,7 @@ Until acquired, this must be stated as a limitation in any reported result, not 
 ==============================================================================
 Check 16: Adjusted vs Unadjusted Prices
 ==============================================================================
-48/48 files have both 'Close' (unadjusted) and 'Adj Close' (dividend/split-adjusted).
+202/202 files have both 'Close' (unadjusted) and 'Adj Close' (dividend/split-adjusted).
 Policy: all return/label calculations use Adj Close (see feature_engineering.py PRICE_COL).
 Raw Close is retained separately for reporting actual traded/quoted price to end users.
 
@@ -80,13 +177,66 @@ Checks 17-18: Missing Historical Periods & Market Holidays
 ==============================================================================
 Check 19: Suspicious Single-Day Price Jumps (>25%, Adj Close, Volume>0 rows only)
 ==============================================================================
+[ADANIENT] 2015-06-03: -38.7% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[ADANIENT] 2019-05-20: +27.4% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[ADANIENT] 2023-02-01: -28.2% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[ADANIENT] 2023-02-02: -26.7% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[ADANIPOWER] 2018-10-10: +25.3% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[ADANIPOWER] 2020-03-12: -26.5% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
 [AXISBANK] 2020-03-23: -27.9% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
 [BAJAJFINSV] 2020-03-23: -25.9% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[BANKBARODA] 2017-10-25: +31.4% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[BANKINDIA] 2017-10-25: +34.1% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[CANBK] 2017-10-25: +38.7% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[CHOLAFIN] 2020-03-23: -29.6% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[DLF] 2014-10-14: -28.6% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[GLENMARK] 2020-06-22: +27.0% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[HINDZINC] 2024-05-21: +25.6% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[IDEA] 2017-01-30: +25.3% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[IDEA] 2019-07-29: -27.0% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[IDEA] 2019-11-19: +36.0% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[IDEA] 2020-02-19: +40.0% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[IDEA] 2020-03-13: +33.3% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[IDEA] 2020-03-18: -35.1% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[IDEA] 2020-09-03: +26.8% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[IDEA] 2021-09-16: +25.7% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
 [INDUSINDBK] 2020-03-26: +44.7% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
 [INDUSINDBK] 2025-03-11: -27.2% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[IRFC] 2024-01-16: +25.1% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[JINDALSTEL] 2015-02-19: +25.7% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[JINDALSTEL] 2020-04-07: +28.9% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[MFSL] 2016-01-27: -26.1% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[MFSL] 2020-03-23: -29.2% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[MMFIN] 2020-03-23: -28.6% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[MOTHERSON] 2022-01-14: +28.6% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[MOTILALOFS] 2024-01-01: -74.6% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[MPHASIS] 2011-02-25: -28.1% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[OFSS] 2024-01-18: +28.7% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[PATANJALI] 2010-12-08: -28.0% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[PATANJALI] 2020-01-27: -94.9% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[PNB] 2017-10-25: +46.2% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[RECLTD] 2024-06-04: -25.2% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
 [SBIN] 2017-10-25: +27.7% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[SRF] 2013-12-02: +27.1% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[SUZLON] 2013-02-28: -34.0% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[SUZLON] 2019-02-22: +29.2% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[SUZLON] 2019-03-05: +25.2% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
 [TATAMOTORS] 2025-10-14: -40.2% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[TMPV] 2025-10-14: -40.2% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[TRENT] 2026-01-01: -33.0% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[UNIONBANK] 2017-10-25: +34.2% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[UNITDSPR] 2012-11-12: +34.7% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
 [VEDL] 2026-04-30: -64.9% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[YESBANK] 2018-09-21: -29.0% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[YESBANK] 2019-02-14: +28.1% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[YESBANK] 2019-04-30: -29.2% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[YESBANK] 2019-10-03: +32.8% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[YESBANK] 2020-03-05: +25.6% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[YESBANK] 2020-03-06: -56.1% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[YESBANK] 2020-03-09: +31.6% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[YESBANK] 2020-03-11: +35.5% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[YESBANK] 2020-03-16: +45.2% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[YESBANK] 2020-03-17: +58.1% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
 [ZEEL] 2019-01-25: -26.6% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
 [ZEEL] 2021-09-14: +40.0% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
 [ZEEL] 2021-09-22: +31.7% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
@@ -95,20 +245,20 @@ Check 19: Suspicious Single-Day Price Jumps (>25%, Adj Close, Volume>0 rows only
 ==============================================================================
 Check 20: Data Source Consistency
 ==============================================================================
-Price data source: yfinance (Yahoo Finance) - 48 symbols
-Fundamentals source: Screener.in - 49 symbols
-In price data but not fundamentals: []
-In fundamentals but not price data: ['HDFC']
+Price data source: yfinance (Yahoo Finance) - 202 symbols
+Fundamentals source: Screener.in - 190 symbols
+In price data but not fundamentals: ['BDL', 'ENRIN', 'ICICIAMC', 'ICICIGI', 'IRFC', 'LGEINDIA', 'PAGEIND', 'POWERINDIA', 'SBICARD', 'SBILIFE', 'TATAMOTORS', 'ZEEL']
+In fundamentals but not price data: []
 These are two independently-sourced datasets on two different update cadences (daily vs annual)
 merged via an as-of join in feature_engineering.py - see that file's REPORTING_LAG_DAYS handling.
 
 ==============================================================================
 PHASE 1 SUMMARY
 ==============================================================================
-Stocks in universe: 48
-Date range: 2010-01-04 to 2026-08-25
-Total rows: 197,150
-Structural integrity (checks 1-6): PASS
+Stocks in universe: 202
+Date range: 2010-01-04 to 2026-08-28
+Total rows: 688,160
+Structural integrity: 44 ISSUES
 Corporate actions (checks 7,10-13): DOCUMENTED (3 known actions)
 Unadjusted splits/bonuses (checks 8-9): FLAGGED - see above
 Survivorship bias (checks 14-15): *** UNRESOLVED LIMITATION - MUST BE DISCLOSED ***

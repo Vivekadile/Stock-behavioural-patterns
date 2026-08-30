@@ -51,9 +51,19 @@ def section(title: str) -> None:
 
 
 def load_all_stocks() -> dict[str, pd.DataFrame]:
-    files = sorted(RAW_DIR.glob("*.csv"))
-    files = [f for f in files if f.stem not in ("stock_metadata", "NIFTY50_INDEX", "fundamentals_annual")]
-    return {f.stem: pd.read_csv(f, parse_dates=["Date"]) for f in files}
+    """Every per-stock OHLCV CSV in data/raw/. Skips helper files
+    (metadata, fundamentals, filing dates, the index, INDIA_VIX) by
+    checking for the OHLCV column signature rather than a hard-coded name
+    list, so new helper files don't break the audit."""
+    out = {}
+    for f in sorted(RAW_DIR.glob("*.csv")):
+        if f.stem in ("NIFTY50_INDEX", "INDIA_VIX"):
+            continue
+        head = pd.read_csv(f, nrows=0)
+        if not {"Date", "Close", "Volume"}.issubset(head.columns):
+            continue  # not a stock OHLCV file (metadata / fundamentals / filing_dates)
+        out[f.stem] = pd.read_csv(f, parse_dates=["Date"])
+    return out
 
 
 def main() -> None:

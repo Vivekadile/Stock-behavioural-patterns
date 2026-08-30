@@ -301,7 +301,13 @@ def load_fundamentals() -> pd.DataFrame:
     was too terse to identify programmatically."""
     fund = pd.read_csv(FUNDAMENTALS_PATH)
     fund["Symbol"] = fund["Symbol"].str.replace("&", "", regex=False)  # "M&M" -> "MM", matches Symbol elsewhere
-    fund["fiscal_year_end"] = pd.to_datetime(fund["FiscalYearEnd"], format="%b %Y")
+    # Screener appends a period-length marker to transition-year rows
+    # ("Mar 2016" + "15m" -> "Mar 201615m" when a company changes its
+    # fiscal year end). Strip the trailing \d+m; the "Mon YYYY" part is
+    # still the real year-end. Rows that still won't parse are dropped.
+    fund["FiscalYearEnd"] = fund["FiscalYearEnd"].astype(str).str.replace(r"\d+m$", "", regex=True).str.strip()
+    fund["fiscal_year_end"] = pd.to_datetime(fund["FiscalYearEnd"], format="%b %Y", errors="coerce")
+    fund = fund.dropna(subset=["fiscal_year_end"]).reset_index(drop=True)
     # A fiscal year ending e.g. "Mar 2023" (parsed as 2023-03-01) actually
     # ends on 2023-03-31; without this the fallback +60 day lag below would
     # be computed from the wrong end of the month.
