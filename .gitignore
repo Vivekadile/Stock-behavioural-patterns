@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets - never commit
+.env
+backend/.env
+backend/.fyers_token.json
+backend/*.log
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+
+# OS
+.DS_Store
+
+# Large / generated artifacts
+*.zip
+
+# Generated datasets - reproducible from data/raw via src/ pipeline.
+# model_features.csv (137 MB) exceeds GitHub's 100 MB file limit.
+data/processed/stocks_daily.csv
+data/processed/model_features.csv
+data/processed/splits/*.csv
+# ...but keep the small, non-reproducible-without-a-run scaler params:
+!data/processed/splits/scaler.json

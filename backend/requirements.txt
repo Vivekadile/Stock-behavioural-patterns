@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]
+pandas
+scikit-learn
+fyers-apiv3
+python-dotenv

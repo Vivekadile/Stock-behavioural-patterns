@@ -1,0 +1,116 @@
+
+==============================================================================
+PHASE 1 QC REPORT
+==============================================================================
+Files audited: 48 stocks + NIFTY50_INDEX.csv + stock_metadata.csv + fundamentals_annual.csv
+Universe: ['ADANIPORTS', 'ASIANPAINT', 'AXISBANK', 'BAJAJ-AUTO', 'BAJAJFINSV', 'BAJFINANCE', 'BHARTIARTL', 'BPCL', 'BRITANNIA', 'CIPLA', 'COALINDIA', 'DRREDDY', 'EICHERMOT', 'GAIL', 'GRASIM', 'HCLTECH', 'HDFCBANK', 'HEROMOTOCO', 'HINDALCO', 'HINDUNILVR', 'ICICIBANK', 'INDUSINDBK', 'INFY', 'IOC', 'ITC', 'JSWSTEEL', 'KOTAKBANK', 'LT', 'MARUTI', 'MM', 'NESTLEIND', 'NTPC', 'ONGC', 'POWERGRID', 'RELIANCE', 'SBIN', 'SHREECEM', 'SUNPHARMA', 'TATAMOTORS', 'TATASTEEL', 'TCS', 'TECHM', 'TITAN', 'ULTRACEMCO', 'UPL', 'VEDL', 'WIPRO', 'ZEEL']
+
+==============================================================================
+Checks 1-6: Structural Integrity (per file)
+==============================================================================
+
+Result: CLEAN - no issues found
+
+==============================================================================
+Checks 7, 10-13: Ticker Changes & Corporate Actions (documented, not inferred)
+==============================================================================
+- HDFC (merger, 2023-07-01): Merged into HDFCBANK. Excluded from universe post-merger; no independent price series exists.
+- INFRATEL (merger, 2020-11-19): Bharti Infratel merged into Indus Towers. Excluded from universe; INDUSTOWER is a different NIFTY50 entrant, not tracked here.
+- TATAMOTORS (demerger, 2025-10-14): Split into passenger-vehicle (TMPV.NS) and commercial-vehicle entities. Price history carried under TMPV.NS ticker; pre/post-split values are NOT organically comparable - flagged as a corp_action_break, forward-return labels spanning this date are excluded, not just the raw price.
+- VEDL (demerger, 2026-04-30): Vedanta Ltd demerger into separate listed entities (Aluminium/Oil & Gas/Power/Steel & Ferrous/Base Metals). High-volume (73.8M shares), high-conviction price drop (-64.9%) on both sides - confirmed via this audit, NOT previously flagged. Requires the same corp_action_break treatment as TATAMOTORS.
+
+These are maintained as an explicit table (KNOWN_CORPORATE_ACTIONS in this file), not silently
+handled inline - any new corporate action found in future data pulls must be added here first.
+
+==============================================================================
+Checks 8-9: Possible Unadjusted Splits/Bonuses (heuristic - Close vs Adj Close divergence)
+==============================================================================
+Method: a real split/bonus should show as a large ratio jump in raw Close on the ex-date, but Adj
+Close should remain smooth across it (that's what adjustment is for). Flagging cases where BOTH
+Close and Adj Close jump together by >25% - that pattern indicates a genuine large move OR an
+adjustment that failed to apply, and needs manual review rather than being trusted blindly.
+NOTE: computed on Volume>0 rows only - zero-volume placeholder rows create false-positive jumps
+when a real trading day is compared against a stale carried-forward quote, not a real prior price.
+[AXISBANK] 2020-03-23: Close and Adj Close both moved >25% together (Close ret=-27.91%) - verify against KNOWN_CORPORATE_ACTIONS above
+[BAJAJFINSV] 2020-03-23: Close and Adj Close both moved >25% together (Close ret=-25.86%) - verify against KNOWN_CORPORATE_ACTIONS above
+[INDUSINDBK] 2020-03-26: Close and Adj Close both moved >25% together (Close ret=44.67%) - verify against KNOWN_CORPORATE_ACTIONS above
+[INDUSINDBK] 2025-03-11: Close and Adj Close both moved >25% together (Close ret=-27.16%) - verify against KNOWN_CORPORATE_ACTIONS above
+[SBIN] 2017-10-25: Close and Adj Close both moved >25% together (Close ret=27.69%) - verify against KNOWN_CORPORATE_ACTIONS above
+[TATAMOTORS] 2025-10-14: Close and Adj Close both moved >25% together (Close ret=-40.15%) - verify against KNOWN_CORPORATE_ACTIONS above
+[VEDL] 2026-04-30: Close and Adj Close both moved >25% together (Close ret=-64.90%) - verify against KNOWN_CORPORATE_ACTIONS above
+[ZEEL] 2019-01-25: Close and Adj Close both moved >25% together (Close ret=-26.61%) - verify against KNOWN_CORPORATE_ACTIONS above
+[ZEEL] 2021-09-14: Close and Adj Close both moved >25% together (Close ret=39.98%) - verify against KNOWN_CORPORATE_ACTIONS above
+[ZEEL] 2021-09-22: Close and Adj Close both moved >25% together (Close ret=31.72%) - verify against KNOWN_CORPORATE_ACTIONS above
+[ZEEL] 2024-01-23: Close and Adj Close both moved >25% together (Close ret=-33.64%) - verify against KNOWN_CORPORATE_ACTIONS above
+
+==============================================================================
+Checks 14-15: Historical NIFTY50 Constituent Changes & Survivorship Bias
+==============================================================================
+STATUS: NOT RESOLVED. This is a real, material limitation of the current dataset, being
+flagged explicitly rather than hidden, per instruction not to silently accept data quality risk.
+
+What we have: today's NIFTY50 constituent list, backfilled across 2010-2026.
+What this means: any company that was IN the NIFTY50 index at some point in 2010-2026 but was
+SUBSEQUENTLY REMOVED (e.g. for sustained underperformance, delisting, or index reshuffling) is
+absent from this dataset entirely - including its historical price history from when it WAS a
+constituent. This is classic survivorship bias: the training set systematically overrepresents
+companies that performed well enough to remain in / re-enter a large-cap index through 2026.
+
+Consequence for this project: any 'this stock beat the market' finding is measured only among
+survivors, and may overstate the achievable edge versus what an investor picking from the FULL
+historical constituent list (including future-delisted/demoted names) would have experienced.
+
+Fix requires: a historical NIFTY50 constituent-change log (index inclusion/exclusion dates per
+company) from NSE Indices or a paid data vendor - not available from yfinance or Screener.in.
+Until acquired, this must be stated as a limitation in any reported result, not corrected for.
+
+==============================================================================
+Check 16: Adjusted vs Unadjusted Prices
+==============================================================================
+48/48 files have both 'Close' (unadjusted) and 'Adj Close' (dividend/split-adjusted).
+Policy: all return/label calculations use Adj Close (see feature_engineering.py PRICE_COL).
+Raw Close is retained separately for reporting actual traded/quoted price to end users.
+
+==============================================================================
+Checks 17-18: Missing Historical Periods & Market Holidays
+==============================================================================
+(Exchange-holiday zero-volume placeholder rows are removed downstream in process_data.py,
+ not here - this section only checks for missing MULTI-DAY periods, a different failure mode.)
+
+==============================================================================
+Check 19: Suspicious Single-Day Price Jumps (>25%, Adj Close, Volume>0 rows only)
+==============================================================================
+[AXISBANK] 2020-03-23: -27.9% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[BAJAJFINSV] 2020-03-23: -25.9% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[INDUSINDBK] 2020-03-26: +44.7% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[INDUSINDBK] 2025-03-11: -27.2% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[SBIN] 2017-10-25: +27.7% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[TATAMOTORS] 2025-10-14: -40.2% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[VEDL] 2026-04-30: -64.9% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[ZEEL] 2019-01-25: -26.6% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[ZEEL] 2021-09-14: +40.0% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[ZEEL] 2021-09-22: +31.7% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+[ZEEL] 2024-01-23: -33.6% - requires manual verification against real market events (see corporate actions above and Project_Report.docx Section 2 for the events already traced: COVID crash 2020-03-23, ZEEL-Sony merger news 2021-09, SBI recap news 2017-10, etc.)
+
+==============================================================================
+Check 20: Data Source Consistency
+==============================================================================
+Price data source: yfinance (Yahoo Finance) - 48 symbols
+Fundamentals source: Screener.in - 49 symbols
+In price data but not fundamentals: []
+In fundamentals but not price data: ['HDFC']
+These are two independently-sourced datasets on two different update cadences (daily vs annual)
+merged via an as-of join in feature_engineering.py - see that file's REPORTING_LAG_DAYS handling.
+
+==============================================================================
+PHASE 1 SUMMARY
+==============================================================================
+Stocks in universe: 48
+Date range: 2010-01-04 to 2026-08-25
+Total rows: 197,150
+Structural integrity (checks 1-6): PASS
+Corporate actions (checks 7,10-13): DOCUMENTED (3 known actions)
+Unadjusted splits/bonuses (checks 8-9): FLAGGED - see above
+Survivorship bias (checks 14-15): *** UNRESOLVED LIMITATION - MUST BE DISCLOSED ***
+Adjusted price policy (check 16): DEFINED (Adj Close for returns)
+Data source consistency (check 20): DOCUMENTED (2 symbols only in price data, not fundamentals)
