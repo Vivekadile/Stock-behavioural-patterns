@@ -1,13 +1,17 @@
-"""Wraps the project's model (Logistic Regression on beats_median_{h}d,
-settled in Phases 6-8 as the best-performing option) as a backend service.
+"""Backend service for the prediction models.
 
-Design principle carried over from the whole project's findings: the ONLY
-number this service treats as a validated output is the probability of
-beating the NIFTY50 median. It does NOT compute or expose an "expected
-return %" or "expected price" - those were tested extensively (Phases 6-8)
-and found to have no signal beyond the historical average. Exposing them
-here would misrepresent the model, regardless of how the frontend labels
-them.
+ACTIVE product objective (30d-reg-v1): a single-horizon 30-TRADING-DAY
+expected-return REGRESSION - get_return_forecast() loads
+models/regression_30d/pipeline.joblib and returns expected_return_30d /
+expected_price for a (symbol, date). Honest caveat baked into the model
+metadata: on the held-out test set this does not beat a historical-mean
+baseline on RMSE; the usable signal is a weak directional/ranking tilt
+(see the Phase 10 portfolio result), not a precise price.
+
+LEGACY (kept, still served): the multi-horizon classification path -
+Logistic Regression on beats_median_{h}d / top_tercile_{h}d, settled in
+Phases 6-10. get_prediction() / get_top_predictions() return the
+probability of beating the NIFTY 200 median.
 
 Phase 6.5: model features are passed through the shared training-time
 transform (prepare_dataset.apply_saved_scaling: winsor -> log1p ->
@@ -35,6 +39,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "src"))
 from feature_engineering import FEATURE_COLS, HORIZONS  # noqa: E402
 from prepare_dataset import apply_saved_scaling  # noqa: E402
+from predict_return_30d import predict_return as _predict_return_30d  # noqa: E402
 
 FEATURES_PATH = PROJECT_ROOT / "data" / "processed" / "model_features.csv"
 
@@ -239,3 +244,29 @@ def get_top_predictions(horizon: int, limit: int = 10) -> list[dict]:
         }
         for i, (_, row) in enumerate(result.iterrows())
     ]
+
+
+# ----------------------------------------------------------------------
+# 30-trading-day expected-return regression (active product objective).
+# Loads models/regression_30d/pipeline.joblib via src/predict_return_30d.py
+# - the preprocessing lives inside that pipeline and is never re-created here.
+# ----------------------------------------------------------------------
+def get_return_forecast(symbol: str, date: str | None = None) -> dict | None:
+    """Expected forward 30-trading-day return for (symbol, date).
+    date=None -> the latest date in the dataset. Overlays the live FYERS
+    price onto current_price / expected_price when available."""
+    if date is None:
+        date = str(_load_data()["Date"].max().date())
+
+    out = _predict_return_30d(symbol, date)
+    if out is None:
+        return None
+
+    live_price = fyers_service.get_ltp(symbol.upper())
+    if live_price is not None:
+        out["current_price"] = round(float(live_price), 2)
+        out["expected_price"] = round(float(live_price) * (1 + out["expected_return_30d"]), 2)
+        out["is_live"] = True
+    else:
+        out["is_live"] = False
+    return out

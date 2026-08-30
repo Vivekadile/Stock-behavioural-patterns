@@ -19,6 +19,13 @@ OUT_PATH = PROCESSED_DIR / "model_features.csv"
 HORIZONS = [7, 30, 60, 90]  # trading days ahead
 PRICE_COL = "Adj Close"  # dividend/split-adjusted, used for all return math
 
+# Active product objective (see src/regression_30d.py): a single-horizon
+# 30-trading-day forward-return REGRESSION. All label families below are
+# still computed and kept in model_features.csv for history/analysis, but
+# the active model trains only on PRIMARY_TARGET.
+PRIMARY_HORIZON = 30
+PRIMARY_TARGET = f"fwd_return_{PRIMARY_HORIZON}d"
+
 TECHNICAL_COLS = [
     "log_return", "price_to_sma10", "price_to_sma20", "price_to_sma50",
     "price_to_ema20", "price_to_ema50", "price_to_ema200",

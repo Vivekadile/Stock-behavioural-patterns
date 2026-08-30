@@ -14,6 +14,15 @@ def top_predictions(horizon: int = Query(30), limit: int = Query(10, le=48)):
     return prediction_service.get_top_predictions(horizon, limit)
 
 
+@router.get("/{symbol}/return")
+def expected_return_30d(symbol: str, date: str | None = Query(None, description="YYYY-MM-DD; default = latest")):
+    """Active model: expected forward 30-trading-day return + implied price."""
+    result = prediction_service.get_return_forecast(symbol, date)
+    if result is None:
+        raise HTTPException(status_code=404, detail=f"'{symbol}' not found on or before {date or 'latest'}")
+    return result
+
+
 @router.get("/{symbol}")
 def prediction_for_symbol(symbol: str, horizon: int = Query(30)):
     if horizon not in VALID_HORIZONS:

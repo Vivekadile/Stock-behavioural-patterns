@@ -25,6 +25,8 @@ frontend/dist/
 data/processed/stocks_daily.csv
 data/processed/model_features.csv
 data/processed/splits/*.csv
+data/processed/regression_dataset_30d.csv
+data/processed/regression_splits_30d/
 # ...but keep the small, non-reproducible-without-a-run scaler params:
 !data/processed/splits/scaler.json
 

@@ -1,0 +1,105 @@
+{
+  "version": "30d-reg-v1",
+  "created_utc": "2026-08-30T15:40:44+00:00",
+  "task": "regression",
+  "target": {
+    "name": "fwd_return_30d",
+    "horizon_trading_days": 30,
+    "definition": "Adj Close[t + 30 trading days] / Adj Close[t] - 1, per Symbol",
+    "price_column": "Adj Close"
+  },
+  "feature_cols": [
+    "log_return",
+    "price_to_sma10",
+    "price_to_sma20",
+    "price_to_sma50",
+    "price_to_ema20",
+    "price_to_ema50",
+    "price_to_ema200",
+    "macd_norm",
+    "macd_hist_norm",
+    "rsi_14",
+    "bb_pct_b",
+    "bb_width",
+    "volatility_10",
+    "volatility_20",
+    "roc_5",
+    "roc_10",
+    "roc_20",
+    "roc_40",
+    "atr_pct",
+    "volume_ratio",
+    "dist_to_high20",
+    "dist_to_low20",
+    "dist_to_high50",
+    "dist_to_low50",
+    "obv_zscore_20",
+    "nifty_return",
+    "nifty_volatility_20",
+    "nifty_trend",
+    "relative_strength",
+    "sector_return",
+    "vix_zscore_60",
+    "vix_change_5d",
+    "fund_roe",
+    "fund_net_profit_growth",
+    "fund_eps_growth",
+    "fund_pe_ratio"
+  ],
+  "n_features": 36,
+  "preprocessing": {
+    "class": "regression_preprocess.WinsorLogRobustScaler",
+    "winsor_q": [
+      0.01,
+      0.99
+    ],
+    "log1p_cols": [
+      "atr_pct",
+      "volume_ratio",
+      "bb_width",
+      "fund_pe_ratio"
+    ],
+    "clip_sigma": 5.0,
+    "note": "fitted on the TRAIN split only; loaded via the pipeline, never re-implemented"
+  },
+  "training": {
+    "train_end": "2022-12-31",
+    "val_end": "2024-06-30",
+    "purge_days": 50,
+    "dataset_rows": 368662,
+    "date_range": [
+      "2010-10-19",
+      "2026-04-21"
+    ],
+    "n_symbols": 180,
+    "best_model_fit_on": "train split only",
+    "selection": "lowest mean RMSE over TimeSeriesSplit(4) walk-forward CV on the training data"
+  },
+  "best_model": "random_forest",
+  "test_metrics": {
+    "MAE": 0.08112491443599702,
+    "RMSE": 0.10594482294825314,
+    "R2": -0.011711503691662184,
+    "MedianAE": 0.06510353869860465,
+    "DirAcc": 0.5304392063761234,
+    "pred_mean": 0.019123389484580047,
+    "pred_std": 0.039094790925497086,
+    "actual_mean": 0.0053316983718452796,
+    "actual_std": 0.10532983295754925,
+    "corr_pred_actual": 0.1929019357485751
+  },
+  "baseline_test_metrics": {
+    "MAE": 0.08313405098178396,
+    "RMSE": 0.10781512448062795,
+    "R2": -0.047747387073259207,
+    "MedianAE": 0.067246397,
+    "DirAcc": 0.5007772313605788,
+    "pred_mean": 0.028347505025275284,
+    "pred_std": 3.469446951953614e-18,
+    "actual_mean": 0.0053316983718452796,
+    "actual_std": 0.10532983295754925,
+    "corr_pred_actual": -1.3107779670712993e-18
+  },
+  "beats_baseline_on_test_RMSE": true,
+  "python": "3.14.4"
+}
