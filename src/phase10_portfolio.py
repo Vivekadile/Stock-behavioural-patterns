@@ -89,7 +89,7 @@ def run(df: pd.DataFrame, kind: str) -> dict:
 
     purge = pd.Timedelta(days=PURGE_DAYS)
     prev_long, prev_short = set(), set()
-    long_net, long_gross, ls_net, bench, ic_list, breadth = [], [], [], [], [], []
+    long_net, long_gross, ls_net, bench, ic_list, breadth, dates = [], [], [], [], [], [], []
 
     for t in rebal_dates:
         day = df[df["Date"] == t]
@@ -124,6 +124,7 @@ def run(df: pd.DataFrame, kind: str) -> dict:
         bench.append(bench_ret)
         ic_list.append(spearmanr(day["p"], day[RET_COL]).correlation)
         breadth.append(len(day))
+        dates.append(pd.Timestamp(t))
 
     long_net, long_gross = np.array(long_net), np.array(long_gross)
     ls_net, bench = np.array(ls_net), np.array(bench)
@@ -134,6 +135,12 @@ def run(df: pd.DataFrame, kind: str) -> dict:
     t_stat, p_val = stats.ttest_1samp(excess, 0)
     ic_ir = ic.mean() / ic.std(ddof=1) * np.sqrt(len(ic)) if ic.std() > 0 else np.nan
 
+    curve = pd.DataFrame({
+        "date": dates, "long_net": long_net, "long_short": ls_net, "benchmark": bench,
+        "long_equity": np.cumprod(1 + long_net), "ls_equity": np.cumprod(1 + ls_net),
+        "bench_equity": np.cumprod(1 + bench), "IC": ic,
+    })
+
     return {
         "kind": kind, "n_periods": len(long_net), "avg_breadth": np.mean(breadth),
         "long": annualise(long_net), "long_gross": annualise(long_gross),
@@ -142,6 +149,7 @@ def run(df: pd.DataFrame, kind: str) -> dict:
         "excess_t": t_stat, "excess_p": p_val,
         "mean_IC": ic.mean(), "IC_stdev": ic.std(ddof=1), "IC_IR": ic_ir,
         "hit_rate_periods": float((long_net > bench).mean()),
+        "curve": curve,
     }
 
 
@@ -181,6 +189,7 @@ def main() -> None:
         r = run(df, kind)
         show(r)
         print()
+        r["curve"].to_csv(PROCESSED_DIR.parent / f"phase10_portfolio_curve_{kind}.csv", index=False)
         flat = {"model": kind, "n_periods": r["n_periods"], "avg_breadth": r["avg_breadth"],
                 "long_sharpe": r["long"]["sharpe"], "long_ann_return": r["long"]["ann_return"],
                 "long_maxDD": r["long"]["max_drawdown"], "ls_sharpe": r["long_short"]["sharpe"],
